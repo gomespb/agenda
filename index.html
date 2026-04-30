@@ -1,97 +1,54 @@
 <!DOCTYPE html>
 
-<html lang="pt-br">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-
-<style>
-body {
-  font-family: Arial;
-  background: #0b0f1a;
-  color: white;
-  text-align: center;
-  margin-top: 100px;
-}
-
-.box {
-  background: #1c2230;
-  padding: 30px;
-  border-radius: 10px;
-  display: inline-block;
-}
-
-input {
-  display: block;
-  margin: 10px auto;
-  padding: 10px;
-  width: 220px;
-}
-
-button {
-  padding: 10px;
-  width: 240px;
-  background: #00c3ff;
-  border: none;
-  cursor: pointer;
-}
-
-#msg {
-  margin-top: 10px;
-  color: red;
-}
-</style>
-
 </head>
 
-<body>
+<body style="font-family:Arial;text-align:center;margin-top:100px;">
 
-<div class="box">
-  <h2>Login</h2>
+<h2>Login</h2>
 
-  <input id="campoCpf" placeholder="CPF">
-  <input id="campoSenha" type="password" placeholder="Senha">
+<input id="cpfInput" placeholder="CPF"><br><br> <input id="senhaInput" type="password" placeholder="Senha"><br><br>
 
-<button id="btnEntrar">Entrar</button>
+<button id="btnAcessar">Entrar</button>
 
-  <p id="msg"></p>
-</div>
+<p id="msg"></p>
 
 <script>
 
-// 🚀 SEM onclick → evita conflito
-document.getElementById("btnEntrar").addEventListener("click", executarLogin);
+document.getElementById("btnAcessar").addEventListener("click", executar);
 
-function executarLogin() {
+function executar() {
 
-  const usuario = document.getElementById("campoCpf").value;
-  const senha = document.getElementById("campoSenha").value;
+  const cpf = document.getElementById("cpfInput").value;
+  const senha = document.getElementById("senhaInput").value;
 
   document.getElementById("msg").innerText = "Verificando...";
 
-  fetch("https://script.google.com/macros/s/AKfycbxntP4xwY8TArURxFZOaIBj9d05zZmZQ_Eyaf8gBDxH-CYSinvEdmqQWskR9SdWzOxjhQ/exec"
-    + encodeURIComponent(usuario)
+  fetch("https://script.google.com/macros/s/AKfycbzLEkl8KvI9SX56lRf_QecUwvOwNwBLwQACigW6lc5Eeg3ncsTKtEAa638fvVFlJqRwUw/exec?usuario="
+    + encodeURIComponent(cpf)
     + "&senha="
     + encodeURIComponent(senha))
 
-  .then(res => res.text())
-  .then(text => {
+  .then(r => r.text())
+  .then(txt => {
 
-    const data = JSON.parse(text);
+    const data = JSON.parse(txt);
 
     if (data.status === "ok") {
       document.body.innerHTML =
-        "<h1>Bem-vindo, " + data.nome + "</h1>";
+        "<h1>Bem-vindo " + data.nome + "</h1>";
     } else {
       document.getElementById("msg").innerText =
         "CPF ou senha inválidos";
     }
 
   })
-  .catch(err => {
+  .catch(e => {
     document.getElementById("msg").innerText =
       "Erro ao conectar";
-    console.error(err);
   });
 }
 
