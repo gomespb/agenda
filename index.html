@@ -1,69 +1,51 @@
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <style>
-    body {
-      font-family: Arial;
-      background: #0b0f1a;
-      color: white;
-      text-align: center;
-      padding-top: 100px;
-    }
-
-    .box {
-      background: #1c2230;
-      padding: 30px;
-      border-radius: 10px;
-      display: inline-block;
-    }
-
-    input {
-      display: block;
-      margin: 10px auto;
-      padding: 10px;
-      width: 200px;
-      border-radius: 5px;
-      border: none;
-    }
-
-    button {
-      padding: 10px 20px;
-      background: #00c3ff;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Login</title>
 </head>
 
-<body>
+<body style="font-family: Arial; text-align:center; margin-top:100px;">
 
-<div class="box">
-  <h2>Login</h2>
+<h2>Login</h2>
 
-  <input type="text" id="usuario" placeholder="Usuário">
-  <input type="password" id="senha" placeholder="Senha">
+<input id="usuario" placeholder="CPF"><br><br> <input id="senha" type="password" placeholder="Senha"><br><br>
 
-  <button onclick="login()">Entrar</button>
+<button onclick="login()">Entrar</button>
 
-  <p id="msg"></p>
-</div>
+<p id="msg"></p>
 
 <script>
 function login() {
+
   const usuario = document.getElementById("usuario").value;
   const senha = document.getElementById("senha").value;
 
   document.getElementById("msg").innerText = "Verificando...";
 
-  google.script.run.withSuccessHandler(function(res) {
-    if (res.status === "ok") {
-      document.body.innerHTML = "<h1>Bem-vindo, " + res.nome + "</h1>";
+  fetch("https://script.google.com/macros/s/AKfycbzLEkl8KvI9SX56lRf_QecUwvOwNwBLwQACigW6lc5Eeg3ncsTKtEAa638fvVFlJqRwUw/exec?usuario="
+    + encodeURIComponent(usuario)
+    + "&senha="
+    + encodeURIComponent(senha))
+
+  .then(res => res.json())
+
+  .then(data => {
+    if (data.status === "ok") {
+      document.body.innerHTML =
+        "<h1>Bem-vindo, " + data.nome + "</h1>";
     } else {
-      document.getElementById("msg").innerText = "Login inválido";
+      document.getElementById("msg").innerText =
+        "CPF ou senha inválidos";
     }
-  }).validarLogin(usuario, senha);
+  })
+
+  .catch(err => {
+    document.getElementById("msg").innerText =
+      "Erro ao conectar";
+    console.error(err);
+  });
 }
 </script>
 
