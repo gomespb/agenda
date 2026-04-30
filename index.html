@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Login</title>
-</head>
-
-<body style="font-family: Arial; text-align:center; margin-top:100px;">
-
-<h2>Login</h2>
-
-<input id="usuario" placeholder="CPF"><br><br> <input id="senha" type="password" placeholder="Senha"><br><br>
-
-<button onclick="login()">Entrar</button>
-
-<p id="msg"></p>
-
 <script>
 function login() {
 
@@ -28,10 +10,11 @@ function login() {
     + encodeURIComponent(usuario)
     + "&senha="
     + encodeURIComponent(senha))
+    
+  .then(response => response.text()) // <- muda aqui
+  .then(text => {
+    const data = JSON.parse(text);
 
-  .then(res => res.json())
-
-  .then(data => {
     if (data.status === "ok") {
       document.body.innerHTML =
         "<h1>Bem-vindo, " + data.nome + "</h1>";
@@ -48,6 +31,3 @@ function login() {
   });
 }
 </script>
-
-</body>
-</html>
