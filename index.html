@@ -4,35 +4,79 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+
+<style>
+body {
+  font-family: Arial;
+  background: #0b0f1a;
+  color: white;
+  text-align: center;
+  margin-top: 100px;
+}
+
+.box {
+  background: #1c2230;
+  padding: 30px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 220px;
+}
+
+button {
+  padding: 10px;
+  width: 240px;
+  background: #00c3ff;
+  border: none;
+  cursor: pointer;
+}
+
+#msg {
+  margin-top: 10px;
+  color: red;
+}
+</style>
+
 </head>
 
-<body style="font-family: Arial; text-align:center; margin-top:100px;">
+<body>
 
-<h2>Login</h2>
+<div class="box">
+  <h2>Login</h2>
 
-<input id="usuario" placeholder="CPF"><br><br> <input id="senha" type="password" placeholder="Senha"><br><br>
+  <input id="campoCpf" placeholder="CPF">
+  <input id="campoSenha" type="password" placeholder="Senha">
 
-<button id="btnLogin">Entrar</button>
+<button id="btnEntrar">Entrar</button>
 
-<p id="msg"></p>
+  <p id="msg"></p>
+</div>
 
 <script>
 
-// 🚀 evita conflito de nome
-document.getElementById("btnLogin").addEventListener("click", function() {
+// 🚀 SEM onclick → evita conflito
+document.getElementById("btnEntrar").addEventListener("click", executarLogin);
 
-  const usuario = document.getElementById("usuario").value;
-  const senha = document.getElementById("senha").value;
+function executarLogin() {
+
+  const usuario = document.getElementById("campoCpf").value;
+  const senha = document.getElementById("campoSenha").value;
 
   document.getElementById("msg").innerText = "Verificando...";
 
-  fetch("https://script.google.com/macros/s/AKfycbxntP4xwY8TArURxFZOaIBj9d05zZmZQ_Eyaf8gBDxH-CYSinvEdmqQWskR9SdWzOxjhQ/exec"
+  fetch("https://script.google.com/macros/s/AKfycbzLEkl8KvI9SX56lRf_QecUwvOwNwBLwQACigW6lc5Eeg3ncsTKtEAa638fvVFlJqRwUw/exec?usuario="
     + encodeURIComponent(usuario)
     + "&senha="
     + encodeURIComponent(senha))
 
-  .then(r => r.text())
+  .then(res => res.text())
   .then(text => {
+
     const data = JSON.parse(text);
 
     if (data.status === "ok") {
@@ -42,14 +86,14 @@ document.getElementById("btnLogin").addEventListener("click", function() {
       document.getElementById("msg").innerText =
         "CPF ou senha inválidos";
     }
-  })
 
+  })
   .catch(err => {
-    document.getElementById("msg").innerText = "Erro ao conectar";
+    document.getElementById("msg").innerText =
+      "Erro ao conectar";
     console.error(err);
   });
-
-});
+}
 
 </script>
 
