@@ -1,102 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
-  <base target="_top">
-  <style>
-    body {
-      background-color: #12161d;
-      color: white;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-    }
-    .login-box {
-      background-color: #1c222d;
-      padding: 40px;
-      border-radius: 8px;
-      width: 320px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
-    h1 { font-size: 24px; margin-bottom: 30px; }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 15px;
-      border: none;
-      border-radius: 4px;
-      font-size: 16px;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background-color: #00c3ff;
-      color: #12161d;
-      border: none;
-      border-radius: 4px;
-      font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    button:disabled { background-color: #555; }
-    #erro {
-      color: #ff4d4d;
-      margin-top: 20px;
-      font-size: 14px;
-      display: none;
-    }
-  </style>
+<meta charset="UTF-8">
+<title>Login</title>
 </head>
+
 <body>
 
-<div class="login-box">
-  <h1>Login</h1>
-  <input type="text" id="userCpf" placeholder="Digite seu CPF">
-  <input type="password" placeholder="...">
-  <button id="btnEntrar" onclick="logar()">Entrar</button>
-  <div id="erro">Erro ao conectar</div>
-</div>
+<h2>Login</h2>
+
+<input type="text" id="usuario" placeholder="Usuário"><br><br>
+<input type="password" id="senha" placeholder="Senha"><br><br>
+
+<button onclick="logar()">Entrar</button>
+
+<p id="msg"></p>
 
 <script>
-  function logar() {
-    const cpf = document.getElementById('userCpf').value;
-    const btn = document.getElementById('btnEntrar');
-    const erroDiv = document.getElementById('erro');
+function logar() {
 
-    if (!cpf) return;
+  const usuario = document.getElementById("usuario").value;
+  const senha = document.getElementById("senha").value;
 
-    btn.disabled = true;
-    btn.innerHTML = "Aguarde...";
-    erroDiv.style.display = "none";
+  fetch("https://script.google.com/macros/s/AKfycbyClGCFB_Y8Ze_Q4gbP2cleVl5jFdpgByUwSt9hqYoKoxOeoCwbK3O7MUB_nTZFazVhpA/exec", {
+    method: "POST",
+    body: JSON.stringify({ usuario, senha })
+  })
+  .then(res => res.json())
+  .then(data => {
 
-    google.script.run
-      .withSuccessHandler(function(res) {
-        if (res.success) {
-          alert("Olá, " + res.nome + "! Acesso concedido.");
-          // Redirecionar para o painel de assinaturas aqui
-        } else {
-          erroDiv.innerText = res.message;
-          erroDiv.style.display = "block";
-          resetLogin();
-        }
-      })
-      .withFailureHandler(function(err) {
-        erroDiv.innerText = "Falha crítica na conexão.";
-        erroDiv.style.display = "block";
-        resetLogin();
-      })
-      .validarAcesso(cpf);
-  }
+    if (data.status === "ok") {
+      document.getElementById("msg").innerText = "Login OK!";
+      
+      // redirecionar
+      window.location.href = "painel.html";
 
-  function resetLogin() {
-    const btn = document.getElementById('btnEntrar');
-    btn.disabled = false;
-    btn.innerHTML = "Entrar";
-  }
+    } else {
+      document.getElementById("msg").innerText = "Login inválido";
+    }
+
+  })
+  .catch(err => {
+    document.getElementById("msg").innerText = "Erro na conexão";
+  });
+
+}
 </script>
 
 </body>
