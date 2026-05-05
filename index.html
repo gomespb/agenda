@@ -1,51 +1,22 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-<meta charset="UTF-8">
-<title>Login</title>
-</head>
-
-<body>
-
-<h2>Login</h2>
-
-<input type="text" id="usuario" placeholder="Usuário"><br><br>
-<input type="password" id="senha" placeholder="Senha"><br><br>
-
-<button onclick="logar()">Entrar</button>
-
-<p id="msg"></p>
-
 <script>
-function logar() {
-
+function login() {
   const usuario = document.getElementById("usuario").value;
   const senha = document.getElementById("senha").value;
 
-  fetch("https://script.google.com/macros/s/AKfycbyClGCFB_Y8Ze_Q4gbP2cleVl5jFdpgByUwSt9hqYoKoxOeoCwbK3O7MUB_nTZFazVhpA/exec", {
+  fetch("https://script.google.com/macros/s/AKfycbyleHnv6Y5cCwRiaW_h4Gc5IEFOcPxokFy3cDnJJDH6eJKRthHU_ErPXaMmar6tIKWH/exec", {
     method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
     body: JSON.stringify({ usuario, senha })
   })
   .then(res => res.json())
   .then(data => {
-
     if (data.status === "ok") {
-      document.getElementById("msg").innerText = "Login OK!";
-      
-      // redirecionar
       window.location.href = "painel.html";
-
     } else {
-      document.getElementById("msg").innerText = "Login inválido";
+      alert("Login inválido");
     }
-
-  })
-  .catch(err => {
-    document.getElementById("msg").innerText = "Erro na conexão";
   });
-
 }
 </script>
-
-</body>
-</html>
