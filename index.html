@@ -3,104 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Login</title>
-
-  <style>
-    body {
-      font-family: Arial;
-      background: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 8px;
-      width: 300px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      text-align: center;
-    }
-
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-    }
-
-    button {
-      width: 100%;
-      padding: 10px;
-      background: #007BFF;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #0056b3;
-    }
-
-    #msg {
-      margin-top: 10px;
-      font-size: 14px;
-      color: red;
-    }
-  </style>
 </head>
 <body>
 
-<div class="box">
-  <h2>Login</h2>
+<h2>Login</h2>
 
-  <input type="text" id="usuario" placeholder="Usuário">
-  <input type="password" id="senha" placeholder="Senha">
+<input type="text" id="usuario" placeholder="Usuário"><br><br>
+<input type="password" id="senha" placeholder="Senha"><br><br>
 
-  <button onclick="login()">Entrar</button>
+<button onclick="login()">Entrar</button>
 
-  <p id="msg"></p>
-</div>
+<p id="msg"></p>
 
 <script>
 function login() {
-  const usuario = document.getElementById("usuario").value.trim();
-  const senha = document.getElementById("senha").value.trim();
+  const usuario = document.getElementById("usuario").value;
+  const senha = document.getElementById("senha").value;
   const msg = document.getElementById("msg");
 
-  if (!usuario || !senha) {
-    msg.innerText = "Preencha todos os campos";
-    return;
-  }
-
-  msg.style.color = "black";
   msg.innerText = "Entrando...";
 
-  // 🔥 SUA URL (já colocada)
-  const url = `https://script.google.com/macros/s/AKfycbwvGmHSQD9MILaCECt_B1GII-SeYrB5cOyptZ7ZlaTnGpwinVTSeiNz1_orI033TQZB/exec?usuario=${encodeURIComponent(usuario)}&senha=${encodeURIComponent(senha)}`;
+  // 🔥 monta URL
+  const url = `https://script.google.com/macros/s/AKfycbxiXRmccrphca-C7jsAifexImFD8L4KddgnCRH-4ELRVYDnjXVsAat93RLlbe_N9u5T/exec?usuario=${encodeURIComponent(usuario)}&senha=${encodeURIComponent(senha)}`;
 
-  fetch(url)
-    .then(res => res.json())
-    .then(data => {
-      if (data.status === "ok") {
-        msg.style.color = "green";
-        msg.innerText = "Login realizado!";
+  // 🔥 cria iframe invisível
+  const iframe = document.createElement("iframe");
+  iframe.style.display = "none";
+  iframe.src = url;
 
-        // 🔥 Redirecionamento (opcional)
-        setTimeout(() => {
-          window.location.href = "painel.html";
-        }, 1000);
+  document.body.appendChild(iframe);
 
-      } else {
-        msg.style.color = "red";
-        msg.innerText = "Usuário ou senha inválidos";
-      }
-    })
-    .catch(err => {
-      msg.style.color = "red";
-      msg.innerText = "Erro de conexão";
-      console.error(err);
-    });
+  // 🔥 simula resposta (sem CORS)
+  setTimeout(() => {
+    msg.innerText = "Login enviado! (verifique validação no script)";
+  }, 1000);
 }
 </script>
 
