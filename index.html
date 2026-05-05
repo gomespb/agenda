@@ -3,36 +3,157 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia Detalhes | Detalhes que fazem a diferença</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonte elegante para o tema Barbearia -->
+    <title>Barbearia Detalhes | Profissional</title>
+    
+    <!-- Fontes do Google para um visual Barbearia Clássica -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        /* CSS INTEGRADO */
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #121212; /* Fundo escuro elegante */
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #000000;
+            padding: 10px 5%;
+            border-bottom: 2px solid #c9a050; /* Linha dourada para combinar com a logo */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        /* Lado Esquerdo: Logo */
+        .logo-container img {
+            height: 100px; /* Tamanho da sua logo */
+            display: block;
+        }
+
+        /* Lado Direito: Menus */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #ffffff;
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #c9a050;
+        }
+
+        /* Destaque para o botão de Login */
+        .login-btn {
+            border: 2px solid #c9a050;
+            padding: 8px 20px;
+            border-radius: 4px;
+        }
+
+        .login-btn:hover {
+            background-color: #c9a050;
+            color: #000 !important;
+        }
+
+        /* Banner Principal (Hero) */
+        .hero {
+            height: 70vh;
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
+                        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop'); /* Imagem de fundo barbearia */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            color: #c9a050;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 30px;
+        }
+
+        .agendar-btn {
+            background-color: #c9a050;
+            color: #000;
+            padding: 15px 35px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 2px;
+            text-transform: uppercase;
+            transition: 0.4s;
+        }
+
+        .agendar-btn:hover {
+            background-color: #fff;
+            transform: scale(1.05);
+        }
+
+        /* Responsividade para Celular */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
 
-    <header class="header">
-        <div class="container nav-container">
-            <!-- Lado Esquerdo: Logo -->
-            <div class="logo">
-                <img src="logo.jpg" alt="Logo Barbearia Detalhes">
-            </div>
-
-            <!-- Lado Direito: Menus -->
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#contato">Fale Conosco</a></li>
-                    <li><a href="#login" class="btn-login">Faça o Login</a></li>
-                </ul>
-            </nav>
+    <header>
+        <!-- Lado Esquerdo -->
+        <div class="logo-container">
+            <img src="Logo.jfif" alt="Barbearia Detalhes Logo">
         </div>
+
+        <!-- Lado Direito -->
+        <nav>
+            <ul>
+                <li><a href="#contato">Fale Conosco</a></li>
+                <li><a href="#login" class="login-btn">Faça o Login</a></li>
+            </ul>
+        </nav>
     </header>
 
     <section class="hero">
-        <div class="hero-content">
-            <h1>BARBEARIA DETALHES</h1>
-            <p>"Detalhes que fazem a diferença"</p>
-            <a href="#" class="cta-button">Agende seu horário</a>
-        </div>
+        <h1>Barbearia Detalhes</h1>
+        <p>"Detalhes que fazem a diferença"</p>
+        <a href="#" class="agendar-btn">Agendar Horário</a>
     </section>
 
 </body>
