@@ -3,14 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbearia Detalhes | Profissional</title>
+    <title>Barbearia Detalhes | Estilo e Tradição</title>
     
-    <!-- Fontes do Google para um visual Barbearia Clássica -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <!-- Fontes Premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* CSS INTEGRADO */
-        
+        /* Variáveis de Cores da Logo */
+        :root {
+            --ouro-logo: #bfa066;
+            --vinho-logo: #800020;
+            --preto-fundo: #0a0a0a;
+            --texto-claro: #f5f5f5;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -18,70 +24,83 @@
         }
 
         body {
-            font-family: 'Roboto', sans-serif;
-            background-color: #121212; /* Fundo escuro elegante */
-            color: #ffffff;
-            line-height: 1.6;
+            font-family: 'Playfair Display', serif;
+            background-color: var(--preto-fundo);
+            color: var(--texto-claro);
+            overflow-x: hidden;
         }
 
-        /* Cabeçalho */
+        /* Cabeçalho Profissional */
         header {
-            background-color: #000000;
-            padding: 10px 5%;
-            border-bottom: 2px solid #c9a050; /* Linha dourada para combinar com a logo */
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 15px 6%;
+            border-bottom: 3px solid var(--ouro-logo);
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
         }
 
         /* Lado Esquerdo: Logo */
-        .logo-container img {
-            height: 100px; /* Tamanho da sua logo */
-            display: block;
+        .logo-box img {
+            height: 110px; /* Destaque para a logo rica em detalhes */
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo-box img:hover {
+            transform: scale(1.05);
         }
 
-        /* Lado Direito: Menus */
+        /* Lado Direito: Menu */
         nav ul {
             list-style: none;
             display: flex;
-            gap: 25px;
+            gap: 35px;
             align-items: center;
         }
 
         nav a {
             text-decoration: none;
-            color: #ffffff;
+            color: var(--texto-claro);
             font-family: 'Oswald', sans-serif;
-            font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            font-weight: bold;
+            font-size: 15px;
+            letter-spacing: 1.5px;
             transition: 0.3s;
         }
 
         nav a:hover {
-            color: #c9a050;
+            color: var(--ouro-logo);
         }
 
-        /* Destaque para o botão de Login */
         .login-btn {
-            border: 2px solid #c9a050;
-            padding: 8px 20px;
-            border-radius: 4px;
+            border: 2px solid var(--vinho-logo);
+            background-color: transparent;
+            padding: 10px 25px;
+            border-radius: 3px;
+            color: var(--texto-claro) !important;
+            box-shadow: inset 0 0 0 0 var(--vinho-logo);
+            transition: all 0.4s ease-in-out;
         }
 
         .login-btn:hover {
-            background-color: #c9a050;
-            color: #000 !important;
+            box-shadow: inset 200px 0 0 0 var(--vinho-logo);
+            border-color: var(--ouro-logo);
+            color: white !important;
         }
 
-        /* Banner Principal (Hero) */
+        /* Hero Section (Fundo compatível com a Logo) */
         .hero {
-            height: 70vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), 
-                        url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop'); /* Imagem de fundo barbearia */
+            height: 90vh;
+            /* Gradiente que imita o fundo da logo (escuro para bronze/vinho) */
+            background: 
+                linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)),
+                url('https://images.unsplash.com/photo-1512690196252-7170ef71aac8?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -89,59 +108,74 @@
             justify-content: center;
             align-items: center;
             text-align: center;
+            position: relative;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(to right, transparent, var(--ouro-logo), transparent);
         }
 
         .hero h1 {
-            font-family: 'Oswald', sans-serif;
-            font-size: 3.5rem;
-            color: #c9a050;
+            font-size: 5rem;
+            color: #fff;
             text-transform: uppercase;
+            letter-spacing: 8px;
             margin-bottom: 10px;
+            text-shadow: 3px 3px 15px rgba(0,0,0,0.9);
+            font-family: 'Oswald', sans-serif;
         }
 
-        .hero p {
-            font-size: 1.2rem;
+        .hero span {
+            color: var(--ouro-logo);
+            font-size: 1.8rem;
             font-style: italic;
-            margin-bottom: 30px;
+            margin-bottom: 45px;
+            display: block;
+            font-weight: 300;
         }
 
-        .agendar-btn {
-            background-color: #c9a050;
-            color: #000;
-            padding: 15px 35px;
+        .cta-main {
+            background-color: var(--vinho-logo);
+            color: #fff;
+            padding: 20px 50px;
             text-decoration: none;
+            font-family: 'Oswald', sans-serif;
             font-weight: bold;
-            border-radius: 2px;
             text-transform: uppercase;
+            border: 1px solid var(--ouro-logo);
             transition: 0.4s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
-        .agendar-btn:hover {
-            background-color: #fff;
-            transform: scale(1.05);
+        .cta-main:hover {
+            background-color: var(--ouro-logo);
+            color: #000;
+            transform: translateY(-5px);
+            letter-spacing: 3px;
         }
 
-        /* Responsividade para Celular */
+        /* Ajuste para dispositivos móveis */
         @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+            header { flex-direction: column; padding: 25px; }
+            .hero h1 { font-size: 3rem; }
+            nav ul { margin-top: 20px; gap: 15px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Lado Esquerdo -->
-        <div class="logo-container">
-            <img src="logosite.png" alt="Barbearia Detalhes Logo">
+        <!-- Lado Esquerdo: Use o arquivo da logo gerado -->
+        <div class="logo-box">
+            <img src="watermarked_img_559620058177420381.png" alt="Logo Barbearia Detalhes">
         </div>
 
-        <!-- Lado Direito -->
+        <!-- Lado Direito: Menus solicitados -->
         <nav>
             <ul>
                 <li><a href="#contato">Fale Conosco</a></li>
@@ -152,8 +186,8 @@
 
     <section class="hero">
         <h1>Barbearia Detalhes</h1>
-        <p>"Detalhes que fazem a diferença"</p>
-        <a href="#" class="agendar-btn">Agendar Horário</a>
+        <span>"Detalhes que fazem a diferença"</span>
+        <a href="#" class="cta-main">Agende seu horário</a>
     </section>
 
 </body>
