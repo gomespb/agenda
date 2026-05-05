@@ -1,8 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+
+  <style>
+    body {
+      font-family: Arial;
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .box {
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+
+    #msg {
+      margin-top: 10px;
+      font-size: 14px;
+      color: red;
+    }
+  </style>
+</head>
 <body>
 
-<h1>TESTE OK</h1>
+<div class="box">
+  <h2>Login</h2>
+
+  <input type="text" id="usuario" placeholder="Usuário">
+  <input type="password" id="senha" placeholder="Senha">
+
+  <button onclick="login()">Entrar</button>
+
+  <p id="msg"></p>
+</div>
+
+<script>
+function login() {
+  const usuario = document.getElementById("usuario").value.trim();
+  const senha = document.getElementById("senha").value.trim();
+  const msg = document.getElementById("msg");
+
+  if (!usuario || !senha) {
+    msg.innerText = "Preencha todos os campos";
+    return;
+  }
+
+  msg.style.color = "black";
+  msg.innerText = "Entrando...";
+
+  fetch("https://script.google.com/macros/s/AKfycbxiXRmccrphca-C7jsAifexImFD8L4KddgnCRH-4ELRVYDnjXVsAat93RLlbe_N9u5T/exec", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      usuario: usuario,
+      senha: senha
+    })
+  })
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Erro na conexão");
+    }
+    return response.json();
+  })
+  .then(data => {
+    if (data.status === "ok") {
+      msg.style.color = "green";
+      msg.innerText = "Login realizado!";
+
+      // 🔥 Redireciona (troque aqui)
+      setTimeout(() => {
+        window.location.href = "painel.html";
+      }, 1000);
+
+    } else {
+      msg.style.color = "red";
+      msg.innerText = "Usuário ou senha inválidos";
+    }
+  })
+  .catch(error => {
+    msg.style.color = "red";
+    msg.innerText = "Erro de conexão com servidor";
+    console.error(error);
+  });
+}
+</script>
 
 </body>
 </html>
