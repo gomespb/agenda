@@ -1,48 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Login</title>
-</head>
 <body>
 
-<h2>Login</h2>
-
-<input type="text" id="usuario" placeholder="Usuário"><br><br>
-<input type="password" id="senha" placeholder="Senha"><br><br>
-
-<button onclick="login()">Entrar</button>
-
-<p id="msg"></p>
-
-<script>
-function login() {
-  const usuario = document.getElementById("usuario").value;
-  const senha = document.getElementById("senha").value;
-  const msg = document.getElementById("msg");
-
-  msg.innerText = "Entrando...";
-
-  fetch("https://script.google.com/macros/s/AKfycbx_bW0TJYU427YGAiRkUD7T3vP_2N1XcjPrGcnjjkIvLrDZqperNdnHfRWkSdQWyGZY/exec", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({ usuario, senha })
-  })
-  .then(res => res.json())
-  .then(data => {
-    if (data.status === "ok") {
-      msg.innerText = "Login OK!";
-      window.location.href = "painel.html";
-    } else {
-      msg.innerText = "Usuário ou senha inválidos";
-    }
-  })
-  .catch(err => {
-    msg.innerText = "Erro: " + err.message;
-  });
-}
-</script>
+<h1>TESTE OK</h1>
 
 </body>
 </html>
