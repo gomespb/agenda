@@ -52,7 +52,7 @@
 <body>
 
 <div class="box">
-  <h2>Login 1</h2>
+  <h2>Login 2</h2>
 
   <input type="text" id="usuario" placeholder="Usuário">
   <input type="password" id="senha" placeholder="Senha">
@@ -78,20 +78,27 @@ function login() {
     method: "POST",
     body: formData
   })
-  .then(res => res.json())
-  .then(data => {
+  .then(res => res.text()) // 👈 MUITO IMPORTANTE (debug)
+  .then(txt => {
+    console.log("RESPOSTA:", txt);
+
+    let data;
+    try {
+      data = JSON.parse(txt);
+    } catch {
+      msg.innerText = "Servidor não retornou JSON";
+      return;
+    }
+
     if (data.status === "ok") {
-      msg.style.color = "green";
-      msg.innerText = "Login OK!";
+      msg.innerText = "Login OK";
     } else {
-      msg.style.color = "red";
       msg.innerText = "Login inválido";
     }
   })
   .catch(err => {
-    msg.style.color = "red";
-    msg.innerText = "Erro de conexão";
     console.error(err);
+    msg.innerText = "Erro de conexão";
   });
 }
 </script>
