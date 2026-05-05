@@ -64,53 +64,34 @@
 
 <script>
 function login() {
-  const usuario = document.getElementById("usuario").value.trim();
-  const senha = document.getElementById("senha").value.trim();
+  const usuario = document.getElementById("usuario").value;
+  const senha = document.getElementById("senha").value;
   const msg = document.getElementById("msg");
 
-  if (!usuario || !senha) {
-    msg.innerText = "Preencha todos os campos";
-    return;
-  }
-
-  msg.style.color = "black";
   msg.innerText = "Entrando...";
+
+  const formData = new FormData();
+  formData.append("usuario", usuario);
+  formData.append("senha", senha);
 
   fetch("https://script.google.com/macros/s/AKfycbxiXRmccrphca-C7jsAifexImFD8L4KddgnCRH-4ELRVYDnjXVsAat93RLlbe_N9u5T/exec", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      usuario: usuario,
-      senha: senha
-    })
+    body: formData
   })
-  .then(response => {
-    if (!response.ok) {
-      throw new Error("Erro na conexão");
-    }
-    return response.json();
-  })
+  .then(res => res.json())
   .then(data => {
     if (data.status === "ok") {
       msg.style.color = "green";
-      msg.innerText = "Login realizado!";
-
-      // 🔥 Redireciona (troque aqui)
-      setTimeout(() => {
-        window.location.href = "painel.html";
-      }, 1000);
-
+      msg.innerText = "Login OK!";
     } else {
       msg.style.color = "red";
-      msg.innerText = "Usuário ou senha inválidos";
+      msg.innerText = "Login inválido";
     }
   })
-  .catch(error => {
+  .catch(err => {
     msg.style.color = "red";
-    msg.innerText = "Erro de conexão com servidor";
-    console.error(error);
+    msg.innerText = "Erro de conexão";
+    console.error(err);
   });
 }
 </script>
