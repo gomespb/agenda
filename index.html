@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h2>Login</h2>
+<h2>Login a</h2>
 
 <input type="text" id="usuario" placeholder="Usuário"><br><br>
 <input type="password" id="senha" placeholder="Senha"><br><br>
@@ -24,7 +24,7 @@ function login() {
   msg.innerText = "Entrando...";
 
   // 🔥 monta URL
-  const url = `https://script.google.com/macros/s/AKfycbxiXRmccrphca-C7jsAifexImFD8L4KddgnCRH-4ELRVYDnjXVsAat93RLlbe_N9u5T/exec?usuario=${encodeURIComponent(usuario)}&senha=${encodeURIComponent(senha)}`;
+  const url = `https://script.google.com/macros/s/AKfycbwvGmHSQD9MILaCECt_B1GII-SeYrB5cOyptZ7ZlaTnGpwinVTSeiNz1_orI033TQZB/exec?usuario=${encodeURIComponent(usuario)}&senha=${encodeURIComponent(senha)}`;
 
   // 🔥 cria iframe invisível
   const iframe = document.createElement("iframe");
