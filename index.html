@@ -9,12 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
 
     <style>
-        /* Variáveis de Cores da Logo */
+        /* Variáveis de Cores da Logo Atualizada */
         :root {
             --ouro-logo: #bfa066;
             --vinho-logo: #800020;
-            --preto-fundo: #0a0a0a;
-            --texto-claro: #f5f5f5;
+            --preto-fundo: #000000; /* Preto absoluto solicitado */
+            --texto-claro: #ffffff; /* Branco puro solicitado */
+            --prata-logo: #d1d1d1; /* Tom para combinar com o novo detalhe prata */
         }
 
         * {
@@ -30,36 +31,49 @@
             overflow-x: hidden;
         }
 
-        /* Cabeçalho Profissional */
+        /* Cabeçalho Profissional - Estrutura em 3 colunas */
         header {
-            background-color: rgba(0, 0, 0, 0.95);
-            padding: 15px 6%;
-            border-bottom: 3px solid var(--ouro-logo);
+            background-color: var(--preto-fundo);
+            padding: 10px 6%;
+            border-bottom: 2px solid var(--prata-logo); /* Borda prata para destacar no preto */
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.9);
         }
 
-        /* Lado Esquerdo: Logo */
+        /* Lado Esquerdo: Logo com Borda Redonda */
         .logo-box img {
-            height: 110px; /* Destaque para a logo rica em detalhes */
-            width: auto;
+            height: 90px; 
+            width: 90px;
+            object-fit: cover;
+            border-radius: 50%; /* Borda redonda solicitada */
+            border: 2px solid var(--prata-logo); /* Realce para a logo no fundo preto */
             transition: transform 0.3s ease;
         }
         
         .logo-box img:hover {
-            transform: scale(1.05);
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Centro: Texto Detalhes Barbearia */
+        .header-center-text {
+            font-family: 'Oswald', sans-serif;
+            color: var(--texto-claro);
+            text-transform: uppercase;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            font-weight: 700;
         }
 
         /* Lado Direito: Menu */
         nav ul {
             list-style: none;
             display: flex;
-            gap: 35px;
+            gap: 30px;
             align-items: center;
         }
 
@@ -69,7 +83,7 @@
             font-family: 'Oswald', sans-serif;
             text-transform: uppercase;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 14px;
             letter-spacing: 1.5px;
             transition: 0.3s;
         }
@@ -80,26 +94,21 @@
 
         .login-btn {
             border: 2px solid var(--vinho-logo);
-            background-color: transparent;
-            padding: 10px 25px;
-            border-radius: 3px;
-            color: var(--texto-claro) !important;
-            box-shadow: inset 0 0 0 0 var(--vinho-logo);
-            transition: all 0.4s ease-in-out;
+            padding: 8px 20px;
+            border-radius: 4px;
+            transition: all 0.4s ease;
         }
 
         .login-btn:hover {
-            box-shadow: inset 200px 0 0 0 var(--vinho-logo);
+            background-color: var(--vinho-logo);
             border-color: var(--ouro-logo);
-            color: white !important;
         }
 
-        /* Hero Section (Fundo compatível com a Logo) */
+        /* Hero Section */
         .hero {
-            height: 90vh;
-            /* Gradiente que imita o fundo da logo (escuro para bronze/vinho) */
+            height: 85vh;
             background: 
-                linear-gradient(rgba(10, 10, 10, 0.8), rgba(10, 10, 10, 0.9)),
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
                 url('https://images.unsplash.com/photo-1512690196252-7170ef71aac8?q=80&w=2070&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
@@ -108,74 +117,62 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            position: relative;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            width: 100%;
-            height: 10px;
-            background: linear-gradient(to right, transparent, var(--ouro-logo), transparent);
         }
 
         .hero h1 {
-            font-size: 5rem;
+            font-size: 4rem;
             color: #fff;
             text-transform: uppercase;
-            letter-spacing: 8px;
-            margin-bottom: 10px;
-            text-shadow: 3px 3px 15px rgba(0,0,0,0.9);
+            letter-spacing: 5px;
             font-family: 'Oswald', sans-serif;
         }
 
         .hero span {
             color: var(--ouro-logo);
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             font-style: italic;
-            margin-bottom: 45px;
-            display: block;
-            font-weight: 300;
+            margin-bottom: 40px;
         }
 
         .cta-main {
             background-color: var(--vinho-logo);
             color: #fff;
-            padding: 20px 50px;
+            padding: 15px 40px;
             text-decoration: none;
             font-family: 'Oswald', sans-serif;
             font-weight: bold;
             text-transform: uppercase;
             border: 1px solid var(--ouro-logo);
             transition: 0.4s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
         }
 
         .cta-main:hover {
-            background-color: var(--ouro-logo);
+            background-color: var(--texto-claro);
             color: #000;
-            transform: translateY(-5px);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
         }
 
-        /* Ajuste para dispositivos móveis */
-        @media (max-width: 768px) {
-            header { flex-direction: column; padding: 25px; }
-            .hero h1 { font-size: 3rem; }
-            nav ul { margin-top: 20px; gap: 15px; }
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .header-center-text { display: none; } /* Esconde o texto central em telas pequenas */
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Lado Esquerdo: Use o arquivo da logo gerado -->
+        <!-- Lado Esquerdo -->
         <div class="logo-box">
-            <img src="logosite.png" alt="Logo Barbearia Detalhes">
+            <!-- Certifique-se de usar a imagem watermarked_img_12198924502264994326.png -->
+            <img src="watermarked_img_12198924502264994326.png" alt="Logo Barbearia Detalhes">
         </div>
 
-        <!-- Lado Direito: Menus solicitados -->
+        <!-- Centro -->
+        <div class="header-center-text">
+            DETALHES BARBEARIA
+        </div>
+
+        <!-- Lado Direito -->
         <nav>
             <ul>
                 <li><a href="#contato">Fale Conosco</a></li>
@@ -185,7 +182,7 @@
     </header>
 
     <section class="hero">
-        <h1>Barbearia Detalhes Prótese Capilar</h1>
+        <h1>Detalhes Prótese Capilar</h1>
         <span>"Detalhes que fazem a diferença"</span>
         <a href="#" class="cta-main">Agende sua Avaliação</a>
     </section>
