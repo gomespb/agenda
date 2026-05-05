@@ -1,44 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbearia Detalhes | Onde a tradição encontra o estilo</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Fonte elegante para o tema Barbearia -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<h2>Login a</h2>
+    <header class="header">
+        <div class="container nav-container">
+            <!-- Lado Esquerdo: Logo -->
+            <div class="logo">
+                <img src="logo.jpg" alt="Logo Barbearia Detalhes">
+            </div>
 
-<input type="text" id="usuario" placeholder="Usuário"><br><br>
-<input type="password" id="senha" placeholder="Senha"><br><br>
+            <!-- Lado Direito: Menus -->
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#contato">Fale Conosco</a></li>
+                    <li><a href="#login" class="btn-login">Faça o Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-<button onclick="login()">Entrar</button>
-
-<p id="msg"></p>
-
-<script>
-function login() {
-  const usuario = document.getElementById("usuario").value;
-  const senha = document.getElementById("senha").value;
-  const msg = document.getElementById("msg");
-
-  msg.innerText = "Entrando...";
-
-  // 🔥 monta URL
-  const url = `https://script.google.com/macros/s/AKfycbwvGmHSQD9MILaCECt_B1GII-SeYrB5cOyptZ7ZlaTnGpwinVTSeiNz1_orI033TQZB/exec?usuario=${encodeURIComponent(usuario)}&senha=${encodeURIComponent(senha)}`;
-
-  // 🔥 cria iframe invisível
-  const iframe = document.createElement("iframe");
-  iframe.style.display = "none";
-  iframe.src = url;
-
-  document.body.appendChild(iframe);
-
-  // 🔥 simula resposta (sem CORS)
-  setTimeout(() => {
-    msg.innerText = "Login enviado! (verifique validação no script)";
-  }, 1000);
-}
-</script>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>BARBEARIA DETALHES</h1>
+            <p>"Detalhes que fazem a diferença"</p>
+            <a href="#" class="cta-button">Agende seu horário</a>
+        </div>
+    </section>
 
 </body>
 </html>
